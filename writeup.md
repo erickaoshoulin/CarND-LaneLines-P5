@@ -1,6 +1,3 @@
-## Writeup Template
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Vehicle Detection Project**
@@ -24,13 +21,23 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
+[image1_0]: ./ipynb_images/car_vs_not_car.png
+[image1_1]: ./ipynb_images/car_vs_not_car_hog.png
+[image1_2]: ./ipynb_images/car_vs_not_car_bin_spatial_0.png
+[image1_3]: ./ipynb_images/car_vs_not_car_bin_spatial_1.png
+[image1_4]: ./ipynb_images/car_vs_not_car_bin_spatial_2.png
+
+
+
+
+
+
+
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
 ### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
 
 You're reading it!
 
@@ -38,18 +45,21 @@ You're reading it!
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the first code cell of `vehicle_detection.ipynb`.  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+![alt text][image1_0]
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-![alt text][image2]
+![alt text][image1_1]
+![alt text][image1_2]
+![alt text][image1_3]
+![alt text][image1_4]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
