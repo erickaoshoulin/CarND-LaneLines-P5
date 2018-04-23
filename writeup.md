@@ -132,7 +132,7 @@ ystops = (450, 500, 650)
 ![alt text][image5_0]
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![alt text][image6_0]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 I try to acculuate 8 frames heat map and set heat_trehold to 9 to filter out some false positive.
@@ -145,3 +145,6 @@ Please see `Tracking pipeline` in `vehicle_detection.ipynb`
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 false positive happen on yellow line. It's hard to get rid of it. I try to accumulate multiple frame and multiple scale to average the noise, but it's still there. I can't get rid of the noise completely.
+
+Here's final result [link to my video result](./project_video_out.mp4)
+
