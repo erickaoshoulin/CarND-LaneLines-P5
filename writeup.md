@@ -28,6 +28,11 @@ The goals / steps of this project are the following:
 [image1_4]: ./ipynb_images/car_vs_not_car_bin_spatial_2.png
 
 
+[image3_0]: ./ipynb_images/sliding_search_windows_0.png
+[image3_1]: ./ipynb_images/sliding_search_windows_1.png
+[image4_0]: ./ipynb_images/sliding_search_windows_2.png
+
+
 
 
 
@@ -75,13 +80,28 @@ I trained a linear SVM using...
 
 I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
 
-![alt text][image3]
+![alt text][image3_0]
+
+![alt text][image4_0]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. 
+```python
+color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+orient = 11  # HOG orientations
+pix_per_cell = 16 # HOG pixels per cell
+cell_per_block = 2 # HOG cells per block
+hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
+spatial_size = (32, 32) # Spatial binning dimensions
+hist_bins = 32    # Number of histogram bins
+spatial_feat = True # Spatial features on or off
+hist_feat = True # Histogram features on or off
+hog_feat = True # HOG features on or off
+```
+ Here are some example images:
 
-![alt text][image4]
+![alt text][image3_1]
 ---
 
 ### Video Implementation
@@ -96,16 +116,27 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
+
+I try to eyeball check the result by applying different parameters. Please see `Hog Sub-sampling Window Search` in `vehicle_detection.ipynb`.
+
+```python
+scales = (0.8, 1.2, 1.5)
+ystarts = (400, 400, 400)
+ystops = (450, 500, 650)
+```
+
+
+
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][image5]
+![alt text][image5_0]
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
 ![alt text][image6]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
+I try to acculuate 8 frames heat map and set heat_trehold to 9 to filter out some false positive.
+Please see `Tracking pipeline` in `vehicle_detection.ipynb`
 
 
 ---
@@ -113,6 +144,4 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
-
+false positive happen on yellow line. It's hard to get rid of it. I try to accumulate multiple frame and multiple scale to average the noise, but it's still there. I can't get rid of the noise completely.
