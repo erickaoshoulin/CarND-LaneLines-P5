@@ -153,7 +153,7 @@ Please see `Tracking pipeline` in `vehicle_detection.ipynb`
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-false positive happen on yellow line. It's hard to get rid of it. I try to accumulate multiple frame and multiple scale to average the noise, but it's still there. I can't get rid of the noise completely.  
+false positive happen on yellow line.  I finally remove it by average the noise across multiple frames. I try to accumulate multiple frame and multiple scale to average the noise, but it's still there. I can't get rid of the noise completely.  
 I also add some threshold for `draw_labeled_bboxes` to avoid draw some small box.
 
 ```python
