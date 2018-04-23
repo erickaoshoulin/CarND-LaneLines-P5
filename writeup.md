@@ -32,6 +32,10 @@ The goals / steps of this project are the following:
 [image3_1]: ./ipynb_images/sliding_search_windows_1.png
 [image4_0]: ./ipynb_images/sliding_search_windows_2.png
 
+[image5_0]:  ./test_failed_images/false_0.png
+[image5_1]:  ./test_failed_images/false_1.png
+[image5_2]:  ./test_failed_images/false_2.png
+[image5_3]:  ./test_failed_images/false_3.png
 
 
 
@@ -120,22 +124,27 @@ Here's an example result showing the heatmap from a series of frames of video, t
 I try to eyeball check the result by applying different parameters. Please see `Hog Sub-sampling Window Search` in `vehicle_detection.ipynb`.
 
 ```python
-scales = (0.8, 1.2, 1.5)
-ystarts = (400, 400, 400)
-ystops = (450, 500, 650)
+scales = (1, 1.55, 2.1)
+ystarts = (380, 420, 420)
+ystops = (500,  500, 550)
 ```
 
+
+I try to dump the false positive in `project_video_out.mp4`, then retune the `find_car()` function. Here's line to false positive samples [link to test failed images](./test_failed_images)
+
+
+![alt text][image5_0]
+![alt text][image5_1]
 
 
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][image5_0]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6_0]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-I try to acculuate 8 frames heat map and set heat_trehold to 9 to filter out some false positive.
+Heat maps are accumulated through `num_frame_avg_m1` frames to avarage the noise. 
+
+I try to acculuate `num_frame_avg_m1 = 28` frames heat map and set heat_trehold to 12 to filter out some false positive.
 Please see `Tracking pipeline` in `vehicle_detection.ipynb`
 
 
